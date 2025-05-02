@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Canlı Sohbet - LoveLink</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 20px;
+    }
+    .chat-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .messages {
+      height: 400px;
+      overflow-y: scroll;
+      margin-bottom: 20px;
+      padding-right: 20px;
+      border-bottom: 1px solid #ddd;
+    }
+    .messages div {
+      margin: 10px 0;
+      padding: 10px;
+      background-color: #e91e63;
+      color: white;
+      border-radius: 5px;
+    }
+    input[type="text"] {
+      width: calc(100% - 90px);
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    button {
+      padding: 10px;
+      background-color: #e91e63;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #c2185b;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h2>Canlı Sohbet</h2>
+    <div class="messages" id="messages"></div>
+    <div>
+      <input type="text" id="messageInput" placeholder="Mesaj yazın...">
+      <button onclick="sendMessage()">Gönder</button>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    // Yeni gelen mesajı ekrana yazdır
+    socket.on('chat message', function(msg){
+      const messageContainer = document.getElementById('messages');
+      const messageElement = document.createElement('div');
+      messageElement.textContent = msg;
+      messageContainer.appendChild(messageElement);
+      messageContainer.scrollTop = messageContainer.scrollHeight;  // Yeni mesaj en altta görünsün
+    });
+
+    // Mesaj gönderme
+    function sendMessage() {
+      const message = document.getElementById('messageInput').value;
+      if (message) {
+        socket.emit('chat message', message);
+        document.getElementById('messageInput').value = ''; // Mesaj yazma alanını temizle
+      }
+    }
+  </script>
+</body>
+</html>

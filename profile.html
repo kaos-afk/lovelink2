@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profile</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      overflow-y: scroll;
+    }
+
+    .profile-container {
+      background-color: #fff;
+      width: 80%;
+      max-width: 900px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+    }
+
+    .profile-header {
+      text-align: center;
+    }
+
+    .profile-header h1 {
+      color: #e91e63;
+      font-size: 2.5em;
+    }
+
+    .profile-header p {
+      color: #777;
+      font-size: 1.1em;
+    }
+
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .action-buttons a {
+      text-decoration: none;
+      padding: 12px 30px;
+      background-color: #e91e63;
+      color: white;
+      border-radius: 30px;
+      margin: 0 10px;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .action-buttons a:hover {
+      background-color: #c2185b;
+      transform: scale(1.05);
+    }
+
+    /* Sol kutu */
+    .request-box {
+      position: fixed;
+      top: 150px;
+      left: 20px;
+      width: 200px;
+      height: 300px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .request-box h3 {
+      margin-top: 0;
+      font-size: 1.5em;
+      color: #e91e63;
+    }
+
+    .request-box button {
+      width: 100%;
+      padding: 12px;
+      background-color: #e91e63;
+      border: none;
+      border-radius: 25px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .request-box button:hover {
+      background-color: #c2185b;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Profil İçeriği -->
+  <div class="profile-container">
+    <div class="profile-header">
+      <h1>Profil Adı</h1>
+      <p>Kısa bir profil açıklaması veya biyografi buraya gelebilir!</p>
+    </div>
+    <div class="action-buttons">
+      <a href="edit-profile.html">Profili Düzenle</a>
+      <a href="chat.html">Sohbet Başlat</a>
+    </div>
+  </div>
+
+  <!-- Sol Kutuda İstek Gönderme Düğmesi -->
+  <div class="request-box">
+    <h3>Arkadaş Arama</h3>
+    <button onclick="sendRequest()">Arkadaşa İstek Gönder</button>
+  </div>
+
+  <script>
+    // Kullanıcıyı arayıp istek göndermek
+    function sendRequest() {
+      // Burada kullanıcı arama ve istek gönderme işlemi yapılacak
+      // Örneğin, kullanıcıyı aramak için bir popup açılabilir veya bir başka sekme açılabilir
+      const username = prompt("Kullanıcı adını girin:");
+
+      if (username) {
+        alert(username + " adlı kullanıcıya istek gönderildi!");
+        // Burada gerçek bir arama işlemi ve istek gönderme işlemi yapılabilir
+        window.open('chat.html?user=' + username, '_blank'); // Kullanıcıya yeni bir sekmede sohbet başlatma
+      }
+    }
+  </script>
+</body>
+</html>

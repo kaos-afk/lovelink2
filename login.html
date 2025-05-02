@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Giriş Yap - LoveLink</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('anime.gif') center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.85);
+      z-index: 0;
+    }
+
+    .form-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+      z-index: 1;
+      margin: 100px auto;
+    }
+
+    h2 {
+      text-align: center;
+      color: #e91e63;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input, button {
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+    }
+
+    button {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button:hover {
+      background-color: #c2185b;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center;
+      background-size: contain;
+      animation: floatHeart 1s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatHeart {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-60px) scale(1.5); }
+    }
+
+    /* Instagram Button */
+    .social-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: url('instagram.jpg') no-repeat center;
+      background-size: cover;
+      border: none;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    /* Sohbet Butonu */
+    .chat-button {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background-color: #ff4081;
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .chat-button:hover {
+      background-color: #c2185b;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="form-container">
+    <h2>Giriş Yap</h2>
+    <form id="loginForm">
+      <input type="tel" placeholder="Telefon Numarası" required>
+      <input type="password" placeholder="Şifre" required>
+      <button type="submit" class="heart-button">Giriş Yap</button>
+    </form>
+    <p class="error" id="error-message"></p>
+  </div>
+
+  <!-- Instagram Button -->
+  <a href="https://www.instagram.com" target="_blank">
+    <button class="social-button"></button>
+  </a>
+
+  <!-- Sohbet Button -->
+  <button class="chat-button" onclick="window.location.href='chat.html'">💬</button>
+
+  <script>
+    document.querySelectorAll("button").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const rect = btn.getBoundingClientRect();
+        for (let i = 0; i < 6; i++) {
+          const heart = document.createElement("div");
+          heart.classList.add("heart");
+          heart.style.left = (e.clientX - rect.left - 10 + (Math.random() * 40 - 20)) + "px";
+          heart.style.top = (e.clientY - rect.top - 10 + (Math.random() * 20 - 10)) + "px";
+          btn.appendChild(heart);
+          setTimeout(() => heart.remove(), 1000);
+        }
+      });
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const phone = this[0].value;
+      const password = this[1].value;
+      const errorMessage = document.getElementById("error-message");
+
+      const storedUser = localStorage.getItem("lovedating_user_" + phone);
+
+      if (storedUser) {
+        const user = JSON.parse(storedUser);
+        if (user.password === password) {
+          alert("Giriş başarılı!");
+          localStorage.setItem("loggedInUser", JSON.stringify(user));
+          window.location.href = "profiles.html";
+        } else {
+          errorMessage.textContent = "Şifre yanlış!";
+        }
+      } else {
+        errorMessage.textContent = "Bu telefon numarasıyla kayıt bulunamadı.";
+      }
+    });
+  </script>
+</body>
+</html>

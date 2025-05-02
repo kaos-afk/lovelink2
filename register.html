@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Kayıt Ol - LoveLink</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .form-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #e91e63;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input, button {
+      margin: 10px 0;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+    }
+
+    button {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #c2185b;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Kayıt Ol</h2>
+    <form id="registerForm">
+      <input type="text" placeholder="İsim" required>
+      <input type="number" placeholder="Yaş" required>
+      <input type="number" placeholder="Boy (cm)" required>
+      <input type="number" placeholder="Kilo (kg)" required>
+      <input type="text" placeholder="Cinsiyet (Erkek/Kadın)" required>
+      <input type="tel" placeholder="Telefon Numarası" required>
+      <input type="password" placeholder="Şifre" required>
+      <input type="file" accept="image/*" id="photo" required>
+      <button type="submit">Kayıt Ol</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const name = form[0].value;
+      const age = form[1].value;
+      const height = form[2].value;
+      const weight = form[3].value;
+      const gender = form[4].value;
+      const phone = form[5].value;
+      const password = form[6].value;
+      const photoFile = form[7].files[0];
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        const photoBase64 = reader.result;
+
+        const user = {
+          name,
+          age,
+          height,
+          weight,
+          gender,
+          phone,
+          password,
+          photo: photoBase64
+        };
+
+        localStorage.setItem("lovedating_user_" + phone, JSON.stringify(user));
+        alert("Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz...");
+        window.location.href = "login.html";
+      };
+
+      reader.readAsDataURL(photoFile);
+    });
+  </script>
+</body>
+</html>

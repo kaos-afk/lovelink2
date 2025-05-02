@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LoveLink - Ana Sayfa</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url('anime1.gif') no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+    h2 {
+      font-size: 2.5em;
+      color: #e91e63;
+      text-align: center;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 18px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 15px;
+    }
+    .btn:hover {
+      background-color: #c2185b;
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    .icon-button {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background-image: url('instagram.jpg');
+      background-size: cover;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+    }
+    .info-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #fbc02d;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: white;
+      font-size: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .section {
+      display: none;
+      text-align: center;
+    }
+    .section.active {
+      display: block;
+    }
+    .profile-card {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 15px;
+    }
+    .profile-card h3 {
+      color: #e91e63;
+    }
+    .profile-card p {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="home-container">
+    <h2>LoveLink - Ana Sayfa</h2>
+    
+    <!-- 3 Buton -->
+    <button class="btn" onclick="showSection('tinder')">Tinder Tarzı Profiller</button>
+    <button class="btn" onclick="showSection('chat')">Sohbet Kısmı</button>
+    <button class="btn" onclick="showSection('support')">Canlı Destek</button>
+    
+    <!-- Instagram Butonu -->
+    <button class="icon-button" onclick="window.open('https://www.instagram.com', '_blank')"></button>
+    
+    <!-- Bilgi Butonu -->
+    <button class="info-button" onclick="alert('LoveLink, insanlar arasında daha yakın ilişkiler kurmak amacıyla geliştirilmiş bir platformdur.')">?</button>
+    
+    <!-- Tinder Tarzı Profiller -->
+    <div id="tinder" class="section">
+      <div class="profile-card">
+        <h3>Ahmet (24)</h3>
+        <p>Yaş: 24, Boy: 180 cm, Kilo: 75 kg, Cinsiyet: Erkek</p>
+        <button class="btn">Kabul Et</button>
+        <button class="btn">Geç</button>
+      </div>
+      <div class="profile-card">
+        <h3>Elif (22)</h3>
+        <p>Yaş: 22, Boy: 170 cm, Kilo: 60 kg, Cinsiyet: Kadın</p>
+        <button class="btn">Kabul Et</button>
+        <button class="btn">Geç</button>
+      </div>
+    </div>
+    
+    <!-- Sohbet Kısmı -->
+    <div id="chat" class="section">
+      <h3>Sohbet Başlat</h3>
+      <textarea rows="4" cols="50" placeholder="Mesaj yaz..."></textarea><br><br>
+      <button class="btn">Gönder</button>
+    </div>
+    
+    <!-- Canlı Destek -->
+    <div id="support" class="section">
+      <h3>Canlı Destek</h3>
+      <p>Yakında gelecek...</p>
+    </div>
+  </div>
+
+  <script>
+    // Sayfa bölümlerini gösterme fonksiyonu
+    function showSection(section) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(s => s.classList.remove('active'));
+      document.getElementById(section).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
